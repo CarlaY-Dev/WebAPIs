@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p id="ShowDate"> </p>
+<hr />
+Name is: <input type="text" id="txtname" class="form-control" />
+
+<br />
+<a id="btnshow" class="btn btn-primary">show</a>
+
+<p id="result"></p>
+@section Scrpits
+{
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                    url: "/api/myAPI",
+                    type: "Get"
+                }).done(function (result) {
+                $("#ShowDate").html(result);
+            });
+        });
+        $('#btnshow').click(function()
+        {
+            $.ajax({
+                url: "/api/myAPI",
+                type: "Get",
+                data: { name: $('#txtname').val() }
+            }).done(function (result) {
+                $('#result').html(result);
+            });
+
+        });
+    </script>
+}
